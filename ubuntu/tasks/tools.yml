@@ -1,0 +1,10 @@
+- name: Installing tools-1
+  become: true
+  apt:
+    name: ["build-essential", "git", "stow", "curl", "fzf", "tmux", "ripgrep"]
+- name: Installing tools-2
+  become: true
+  apt:
+    name: ["lua5.4", "cmake", "pkg-config", "clangd", "bear", "gettext", "unzip"]
+- name: Install node
+  shell: curl -fsSL https://deb.nodesource.com/setup_21.x > ~/.installer && chmod +x ~/.installer && ~/.installer && rm .installer && apt-get install -y nodejs

@@ -1,0 +1,17 @@
+- name: Install ZSH
+  apt:
+    name: "zsh"
+- name: Install shell
+  shell: chsh -s `which zsh`
+- name: Install oh-my-zsh
+  shell: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh > ~/.oh-my-installer && chmod +x ~/.oh-my-installer && ~/.oh-my-installer && rm ~/.zshrc
+- name: Install zsh-autosuggestions
+  ansible.builtin.git:
+    repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
+    dest: "~/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+- name: Install zsh-vi-mode
+  ansible.builtin.git:
+    repo: "https://github.com/jeffreytse/zsh-vi-mode.git"
+    dest: "~/.oh-my-zsh/custom/plugins/zsh-vi-mode"
+- name: Change shell to zsh
+  shell: chsh -s $(which zsh)

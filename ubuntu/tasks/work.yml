@@ -1,0 +1,4 @@
+- name: Cloning otnanalyzer
+  ansible.builtin.git:
+    repo: "git@github.com:ammaralmorsi/otnanalyzer.git"
+    dest: "{{ ansible_env.HOME }}/work/otnanalyzer"

@@ -1,0 +1,12 @@
+- name: Cloning dynaroute
+  ansible.builtin.git:
+    repo: "git@github.com:h4z3m/dynaroute.git"
+    dest: "{{ ansible_env.HOME }}/personal/dynaroute"
+- name: Cloning dynaroute-backend
+  ansible.builtin.git:
+    repo: "git@github.com:h4z3m/dynaroutebe.git"
+    dest: "{{ ansible_env.HOME }}/personal/dytrbe"
+- name: Cloning aoc
+  ansible.builtin.git:
+    repo: "git@github.com:ammaralmorsi/aoc.git"
+    dest: "{{ ansible_env.HOME }}/personal/aoc"

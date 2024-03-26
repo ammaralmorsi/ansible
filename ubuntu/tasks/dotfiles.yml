@@ -1,0 +1,8 @@
+- name: Cloning my dotfiles
+  ansible.builtin.git:
+    repo: "https://github.com/ammaralmorsi/dotfiles.git"
+    dest: "{{ ansible_env.HOME }}/dotfiles"
+- name: Stow
+  ansible.builtin.shell:
+    chdir: "{{ ansible_env.HOME }}/dotfiles"
+    cmd: stow $(ls) 
