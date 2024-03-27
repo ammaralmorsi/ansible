@@ -14,6 +14,6 @@
     dest: "{{ dest_key }}.pub"
     mode: 0644
 - name: Add GitHub to known hosts
-  become: yes
+  become: true
   ansible.builtin.shell:
     ssh-keyscan -H github.com >> "{{ ansible_env.HOME }}/.ssh/known_hosts"
