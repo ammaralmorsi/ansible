@@ -1,17 +1,23 @@
 - name: Install ZSH
+  become: true
   apt:
     name: "zsh"
-- name: Install shell
-  shell: chsh -s `which zsh`
-- name: Install oh-my-zsh
-  shell: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh > ~/.oh-my-installer && chmod +x ~/.oh-my-installer && ~/.oh-my-installer && rm ~/.zshrc
+- name: download oh-my-zsh installer
+  ansible.builtin.get_url:
+    url: https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+    dest: "{{ ansible_env.HOME }}/.oh_my_zsh_installer"
+- name: Run oh-my-zsh installer
+  shell: rm -rf "{{ ansible_env.HOME }}/.oh-my-zsh" && chmod +x "{{ ansible_env.HOME }}/.oh_my_zsh_installer" && "{{ ansible_env.HOME }}/.oh_my_zsh_installer"
+- name: remove .zshrc
+  shell: rm "{{ ansible_env.HOME }}/.zshrc"
 - name: Install zsh-autosuggestions
   ansible.builtin.git:
     repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
-    dest: "~/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
 - name: Install zsh-vi-mode
   ansible.builtin.git:
     repo: "https://github.com/jeffreytse/zsh-vi-mode.git"
-    dest: "~/.oh-my-zsh/custom/plugins/zsh-vi-mode"
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins/zsh-vi-mode"
 - name: Change shell to zsh
+  become: true
   shell: chsh -s $(which zsh)
